@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Customer Response Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1 {
+            color: #4a90e2;
+        }
+
+        .chat-box {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+
+        .bot-response {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #e8f4fc;
+            border-radius: 5px;
+        }
+
+        .user-query {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #d4fadb;
+            border-radius: 5px;
+            text-align: right;
+        }
+
+        .input-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .input-area button {
+            background-color: #4a90e2;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .input-area button:hover {
+            background-color: #357abd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Response Bot</h1>
+            <p>How can I help you today?</p>
+        </div>
+        <div class="chat-box" id="chatBox">
+            <!-- Chat will appear here -->
+        </div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Type your question here...">
+            <button onclick="handleQuery()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const responses = {
+            "hi": "Hello! How can I assist you today?",
+            "how are you": "I'm just a bot, but I'm here to help! How can I assist you?",
+            "what is your name": "I'm your AI assistant. You can call me Bot!",
+            "help": "Of course! Tell me what you need assistance with.",
+            "pricing": "Our pricing varies based on the service. Please let me know what specific service you're interested in!",
+            "hours": "We are open from 9 AM to 5 PM, Monday through Friday.",
+            "contact": "You can reach us at support@example.com or call us at (123) 456-7890.",
+            "default": "I'm sorry, I didn't quite catch that. Can you please rephrase?"
+        };
+
+        function handleQuery() {
+            const userInput = document.getElementById("userInput").value.toLowerCase();
+            const chatBox = document.getElementById("chatBox");
+
+            // Add user input to chat
+            const userMessage = document.createElement("div");
+            userMessage.className = "user-query";
+            userMessage.innerText = userInput;
+            chatBox.appendChild(userMessage);
+
+            // Add bot response to chat
+            const botResponse = document.createElement("div");
+            botResponse.className = "bot-response";
+            botResponse.innerText = responses[userInput] || responses["default"];
+            chatBox.appendChild(botResponse);
+
+            // Scroll to the bottom of the chat box
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Clear input field
+            document.getElementById("userInput").value = "";
+        }
+    </script>
+</body>
+</html>
